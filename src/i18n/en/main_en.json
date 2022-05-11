@@ -1,0 +1,35 @@
+{
+  "title": "Sound Quality",
+  "another_lang": "中",
+  "menu": {
+    "algo": "Algorithms",
+    "record": "Record",
+    "score": "Scores",
+    "history": "History"
+  },
+  "actions": {
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "search": "Search",
+    "reset": "Reset",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "confirm": "Confirm",
+    "close": "Close",
+    "ok": "OK",
+    "yes": "Yes",
+    "no": "No",
+    "submit": "Submit",
+    "send": "Send",
+    "download": "Download",
+    "upload": "Upload",
+    "send_email": "Send Email",
+    "search_hint": "Search..."
+  },
+  "descriptions": {
+  }
+}

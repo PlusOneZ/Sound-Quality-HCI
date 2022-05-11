@@ -1,0 +1,35 @@
+{
+  "title": "声音质量",
+  "another_lang": "EN",
+  "menu": {
+    "algo": "算法",
+    "record": "录音",
+    "score": "分数",
+    "history": "记录"
+  },
+  "actions": {
+    "add": "添加",
+    "edit": "编辑",
+    "delete": "删除",
+    "save": "保存",
+    "cancel": "取消",
+    "search": "搜索",
+    "reset": "重置",
+    "back": "返回",
+    "next": "下一页",
+    "previous": "上一页",
+    "confirm": "确认",
+    "close": "关闭",
+    "ok": "确定",
+    "yes": "是",
+    "no": "否",
+    "submit": "提交",
+    "send": "发送",
+    "download": "下载",
+    "upload": "上传",
+    "send_email": "发送邮件",
+    "search_hint": "站内搜索..."
+  },
+  "descriptions": {
+  }
+}
