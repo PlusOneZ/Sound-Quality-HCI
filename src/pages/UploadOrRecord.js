@@ -12,6 +12,10 @@ function UploadOrRecord({uploadHandler, audio}) {
   const location = useLocation();
   const {t} = useTranslation("main");
 
+  function onUpload() {
+    uploadHandler(audio)
+  }
+
   let v = 0;
   if (location.pathname.indexOf("record") === -1) {
     v = 1
@@ -47,7 +51,7 @@ function UploadOrRecord({uploadHandler, audio}) {
                   <Button
                       variant="outlined"
                       sx={{mt: 2}}
-                      onClick={uploadHandler}
+                      onClick={onUpload}
                       endIcon={<SendIcon/>}
                   >
                     {t("hints.analysisButton")}

@@ -3,7 +3,7 @@ import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import {useTranslation} from "react-i18next";
 import Paper from "@mui/material/Paper";
-import {Link} from 'react-router-dom'
+import {Link, useLocation} from 'react-router-dom'
 
 import CalculateIcon from '@mui/icons-material/Calculate';
 import GraphicEqIcon from '@mui/icons-material/GraphicEq';
@@ -14,10 +14,10 @@ import AutofpsSelectIcon from '@mui/icons-material/AutofpsSelect';
 
 function TabBar(props) {
   const {t} = useTranslation("main", { keyPrefix: "menu" });
-  const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const location = useLocation();
 
   const tabs = [
     {
@@ -40,6 +40,15 @@ function TabBar(props) {
     //   icon: <HistoryIcon />
     // }
   ]
+
+  let v = 0;
+  for (let i = 0; i < tabs.length; i++) {
+    if (location.pathname.indexOf(tabs[i].route) !== -1) {
+      v = i;
+    }
+  }
+
+  const [value, setValue] = React.useState(v);
 
   return (
       <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>

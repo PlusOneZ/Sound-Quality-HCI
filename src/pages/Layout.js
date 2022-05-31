@@ -15,6 +15,7 @@ import AppBar from "../components/AppBar";
 import RecorderControls from "../components/RecorderController";
 import useRecorder from "../hooks/useRecorder";
 import UploadController from "../components/UploadController";
+import {audioQualityRequest} from "../requests/soundQuality";
 
 function Layout(props) {
   const {recorderState, ...handlers} = useRecorder()
@@ -25,7 +26,9 @@ function Layout(props) {
         <Routes>
           <Route path={"/"} element={<> <AppBar /> <Outlet />  <TabBar /></>} >
             <Route path={"algorithms"} element={<> </>} />
-            <Route path={"sound-quality-analysis"} element={<UploadOrRecord audio={audio}/>} >
+            <Route path={"sound-quality-analysis"}
+                   element={<UploadOrRecord audio={audio} uploadHandler={audioQualityRequest}/>}
+            >
               <Route path={""}/>
               <Route path={"record"} element={<RecorderControls recorderState={recorderState} handlers={handlers} audio={audio}/>}>
                 {/*  Record UI here */}
