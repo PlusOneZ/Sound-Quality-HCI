@@ -32,5 +32,11 @@
     "search_hint": "Search..."
   },
   "descriptions": {
+  },
+  "hints": {
+    "analysisButton": "Upload for Analysis",
+    "saveRecording": "Save current recording.",
+    "cancelRecording": "Cancel recording (discard).",
+    "clickToStartRecording": "Click button to start recoding."
   }
 }
