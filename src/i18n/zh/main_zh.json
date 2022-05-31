@@ -3,9 +3,10 @@
   "another_lang": "EN",
   "menu": {
     "algo": "算法",
-    "record": "录音",
-    "score": "分数",
-    "history": "记录"
+    "quality": "质量分析",
+    "record": "录制",
+    "augment": "音质增强",
+    "upload": "上传文件"
   },
   "actions": {
     "add": "添加",

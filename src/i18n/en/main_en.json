@@ -3,9 +3,10 @@
   "another_lang": "中",
   "menu": {
     "algo": "Algorithms",
+    "quality": "Quality",
     "record": "Record",
-    "score": "Scores",
-    "history": "History"
+    "augment": "Augmentation",
+    "upload": "Upload File"
   },
   "actions": {
     "add": "Add",
