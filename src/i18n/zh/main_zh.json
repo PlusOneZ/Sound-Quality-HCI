@@ -37,6 +37,7 @@
     "analysisButton": "上传音频以分析",
     "saveRecording": "保存当前录音片段",
     "cancelRecording": "放弃录音",
-    "clickToStartRecording": "点击按钮，开始录制"
+    "clickToStartRecording": "点击按钮，开始录制",
+    "chooseFromLocal": "选择本地音频文件"
   }
 }

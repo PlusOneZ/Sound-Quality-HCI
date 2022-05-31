@@ -37,6 +37,7 @@
     "analysisButton": "Upload for Analysis",
     "saveRecording": "Save current recording.",
     "cancelRecording": "Cancel recording (discard).",
-    "clickToStartRecording": "Click button to start recoding."
+    "clickToStartRecording": "Click button to start recoding.",
+    "chooseFromLocal": "Choose From Local File"
   }
 }

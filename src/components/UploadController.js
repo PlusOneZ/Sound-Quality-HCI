@@ -3,6 +3,7 @@ import {Button, styled} from "@mui/material";
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import {useState} from "react";
 import Typography from "@mui/material/Typography";
+import {useTranslation} from "react-i18next";
 
 const Input = styled('input')({
   display: 'none',
@@ -11,6 +12,7 @@ const Input = styled('input')({
 function UploadController({setUploadFile}) {
   const [filename, setFilename] = useState("");
   // TODO: clear this on mount
+  const {t} = useTranslation("main")
 
   function onUpload(e) {
     console.log(e.target.files[0])
@@ -39,7 +41,7 @@ function UploadController({setUploadFile}) {
               endIcon={<FileUploadIcon/>}
               component={"span"}
           >
-            选择本地音频文件
+            {t("hints.chooseFromLocal")}
           </Button>
         </label>
         <Box sx={{minHeight: 2}}>&nbsp;</Box>
