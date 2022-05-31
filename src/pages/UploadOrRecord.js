@@ -3,15 +3,20 @@ import {useState} from "react";
 import Tabs from "@mui/material/Tabs";
 import {useTranslation} from "react-i18next";
 import Tab from "@mui/material/Tab";
-import {Link, Outlet} from "react-router-dom"
+import {Link, Outlet, useLocation} from "react-router-dom"
 import {Button} from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 
 
 function UploadOrRecord({uploadHandler, audio}) {
-  const [value, setValue] = useState(0);
+  const location = useLocation();
   const {t} = useTranslation("main");
 
+  let v = 0;
+  if (location.pathname.indexOf("record") === -1) {
+    v = 1
+  }
+  const [value, setValue] = useState(v);
 
   function changeValue(event, newVal) {
     setValue(newVal)

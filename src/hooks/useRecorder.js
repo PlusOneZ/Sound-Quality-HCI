@@ -93,5 +93,11 @@ export default function useRecorder() {
     startRecording: () => startRecording(setRecorderState),
     cancelRecording: () => setRecorderState(initialState),
     saveRecording: () => saveRecording(recorderState.mediaRecorder),
+    setUploadFile: (fileUrl) => {
+      setRecorderState({
+        ...initialState,
+        audio: fileUrl
+      })
+    }
   };
 }

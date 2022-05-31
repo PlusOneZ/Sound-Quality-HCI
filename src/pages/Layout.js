@@ -14,6 +14,7 @@ import UploadOrRecord from "./UploadOrRecord";
 import AppBar from "../components/AppBar";
 import RecorderControls from "../components/RecorderController";
 import useRecorder from "../hooks/useRecorder";
+import UploadController from "../components/UploadController";
 
 function Layout(props) {
   const {recorderState, ...handlers} = useRecorder()
@@ -29,7 +30,7 @@ function Layout(props) {
               <Route path={"record"} element={<RecorderControls recorderState={recorderState} handlers={handlers} audio={audio}/>}>
                 {/*  Record UI here */}
               </Route>
-              <Route path={"upload"}>
+              <Route path={"upload"} element={<UploadController setUploadFile={handlers.setUploadFile}/>}>
                 {/*  Record UI here */}
               </Route>
             </Route>
