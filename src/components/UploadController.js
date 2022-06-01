@@ -47,7 +47,7 @@ function UploadController({setUploadFile}) {
         <Box sx={{minHeight: 2}}>&nbsp;</Box>
         { filename &&
             <Typography variant={"body1"} >
-              当前音频：{filename}
+              {t('hints.currentAudioName') + filename}
             </Typography>
         }
       </Box>

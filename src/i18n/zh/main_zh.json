@@ -32,12 +32,16 @@
     "search_hint": "站内搜索..."
   },
   "descriptions": {
+    "all": "全选",
+    "algo": "算法"
   },
   "hints": {
     "analysisButton": "上传音频以分析",
     "saveRecording": "保存当前录音片段",
     "cancelRecording": "放弃录音",
     "clickToStartRecording": "点击按钮，开始录制",
-    "chooseFromLocal": "选择本地音频文件"
+    "chooseFromLocal": "选择本地音频文件",
+    "currentAudioName": "当前音频文件",
+    "chooseAlgorithms": "选择音频质量分析算法："
   }
 }

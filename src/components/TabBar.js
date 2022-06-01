@@ -27,7 +27,7 @@ function TabBar(props) {
     },
     {
       label: t("quality"),
-      route: "/sound-quality-analysis",
+      route: "/sound-quality-analysis/record",
       icon: <GraphicEqIcon />
     },
     {

@@ -32,12 +32,16 @@
     "search_hint": "Search..."
   },
   "descriptions": {
+    "all": "All",
+    "algo": ""
   },
   "hints": {
     "analysisButton": "Upload for Analysis",
     "saveRecording": "Save current recording.",
     "cancelRecording": "Cancel recording (discard).",
     "clickToStartRecording": "Click button to start recoding.",
-    "chooseFromLocal": "Choose From Local File"
+    "chooseFromLocal": "Choose From Local File",
+    "currentAudioName": "Current Audio File: ",
+    "chooseAlgorithms": "Choose Analysis Algorithms: "
   }
 }
