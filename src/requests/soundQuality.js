@@ -1,9 +1,27 @@
 import axios from "axios";
+import {availableAlgorithms} from "../components/AlgorithmSelection";
 
-async function audioQualityRequest(audioURL) {
+
+function getAlgoList(algo) {
+  let list = []
+  for (let i = 0; i < availableAlgorithms.length; i++) {
+    if (algo[availableAlgorithms[i]]) {
+      list.push(availableAlgorithms[i])
+    }
+  }
+  return list
+}
+
+async function audioQualityRequest(audioURL, algorithms) {
   let audio = await fetch(audioURL).then(r => r.blob())
-  return axios.post("tbd", audio, {
-    headers: {"Content-Type": "audio/wav"}
+  let algoList = getAlgoList(algorithms)
+  let form = new FormData()
+  form.append("audioFile", audio)
+  form.append("algorithms", algoList)
+  return axios.post("tbd", form, {
+    headers: {
+      "Content-Type": "multipart/form-data"
+    }
   })
 }
 

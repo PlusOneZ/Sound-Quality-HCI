@@ -10,7 +10,7 @@ Layout
 import { BrowserRouter } from "react-router-dom";
 import TabBar from "../components/TabBar";
 import {Route, Routes, Outlet} from "react-router-dom";
-import UploadOrRecord from "./UploadOrRecord";
+import {UploadOrRecord} from "./UploadOrRecord";
 import AppBar from "../components/AppBar";
 import RecorderControls from "../components/RecorderController";
 import useRecorder from "../hooks/useRecorder";
