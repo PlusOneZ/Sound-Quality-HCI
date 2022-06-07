@@ -34,7 +34,6 @@ function App() {
       <ColorModeContext.Provider value={colorMode}>
         <ThemeProvider theme={theme}>
           <Layout/>
-            <IntroPage/>
         </ThemeProvider>
       </ColorModeContext.Provider>
   );
