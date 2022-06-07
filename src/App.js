@@ -4,7 +4,7 @@ import Layout from "./pages/Layout";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import getDesignTokens from './theme/themeColor';
-import IntroPage from "./pages/Intro";
+
 
 const ColorModeContext = React.createContext({
   toggleColorMode: () => {

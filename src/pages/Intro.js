@@ -2,19 +2,15 @@ import {createTheme,ThemeProvider} from "@mui/material";
 import Container from "@mui/material/Container"
 import {CssBaseline} from "@mui/material";
 import {Grid} from "@mui/material";
-import {Paper} from "@mui/material";
+
 import PopUpCard from "../components/PopUpCard"
 import VideoCard from "../components/VideoCard"
-// import MainFeaturedPost from "../components/MainFeaturePost";
+
 
 
 //TODO: add i18n
 
 
-// const algorithmCard={
-//     algoName: "yes",
-//     description: "no",
-// }
 
 const algorithmCards=[
     {
