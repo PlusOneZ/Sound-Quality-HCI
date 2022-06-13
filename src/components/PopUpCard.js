@@ -21,6 +21,13 @@ import pesqImg from "../assets/pesq.png"
 import sisdrImg from "../assets/sisdr.png"
 import stoiImg from "../assets/stoi.png"
 import {Grid} from "@mui/material";
+import markdown from "../assets/markdown.json"
+
+
+
+import ReactMarkdown from "react-markdown";
+
+
 
 
 
@@ -39,13 +46,15 @@ function PopUpCard(props){
 
 
     const [open,setOpen]=React.useState(false);
-    const handleOpen=()=>{setOpen(true)};
+    const handleOpen=()=>{setOpen(true);};
     const handleClose=()=>{setOpen(false);};
+
+
+
 
     const cardStyle={
         margin: 2,
         width: 1 / 4,
-
 
         "&:hover":{
             boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
@@ -74,7 +83,7 @@ function PopUpCard(props){
                     <CardMedia
                         component="img"
                         alt="green iguana"
-                        height="100"
+                        height="200"
                         src={imgMap[cardInfo.algoName]}
                     />
                     <CardContent>
@@ -106,12 +115,11 @@ function PopUpCard(props){
                                 <CloseIcon />
                             </IconButton>
                             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                                some detailed information about {cardInfo.algoName}
+                                <ReactMarkdown children={markdown[cardInfo.id].content}/>
                             </Typography>
                         </Box>
                     </Fade>
                 </Modal>
-
             </Grid>
 
     )
@@ -120,6 +128,7 @@ function PopUpCard(props){
 
 PopUpCard.propTypes={
     cardInfo:PropTypes.shape({
+        id:PropTypes.number.isRequired,
         algoName:PropTypes.string.isRequired,
         description:PropTypes.string.isRequired,
     }).isRequired,

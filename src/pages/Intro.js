@@ -14,26 +14,32 @@ import VideoCard from "../components/VideoCard"
 
 const algorithmCards=[
     {
+        id:0,
         algoName: "mosnet",
         description: "some scratch info about mosnet",
     },
     {
+        id:1,
         algoName: "srmr",
         description: "some scratch info about srmr",
     },
     {
+        id:2,
         algoName: "bsseval",
         description: "some scratch info about bsseva;",
     },
     {
+        id:3,
         algoName: "pesq",
         description: "some scratch info about pesq",
     },
     {
+        id:4,
         algoName: "sisdr",
         description: "some scratch info about sisdr",
     },
     {
+        id:5,
         algoName: "stoi",
         description: "some scratch info about stoi",
     }
@@ -47,24 +53,14 @@ export default function IntroPage(){
     return(
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <Container maxWidth="lg">
+            <Container maxWidth="lg" >
                 <main>
                     {/*<MainFeaturedPost post={mainFeaturedPost} />*/}
                     <Grid sx={{ flexGrow: 1,padding:5 }} container spacing={10}>
-                        <Grid item xs={12} >
-                            <Grid container justifyContent="center" spacing={2} >
+                        <Grid item xs={12}>
+                            <Grid container justifyContent="center" spacing={2}>
                                 {[0, 1, 2].map((value) => (
-                                    // <Grid key={value} item>
-                                    //     <Paper
-                                    //         sx={{
-                                    //             height: 140,
-                                    //             width: 100,
-                                    //             backgroundColor: (theme) =>
-                                    //                 theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                                    //         }}
-                                    //     />
-                                    //
-                                    // </Grid>
+
                                     <PopUpCard cardInfo={algorithmCards[value]} />
                                 ))}
                             </Grid>
@@ -73,17 +69,7 @@ export default function IntroPage(){
                             </Grid>
                             <Grid container justifyContent="center" spacing={2}>
                                 {[3, 4, 5].map((value) => (
-                                    // <Grid key={value} item>
-                                    //     <Paper
-                                    //         sx={{
-                                    //             height: 140,
-                                    //             width: 100,
-                                    //             backgroundColor: (theme) =>
-                                    //                 theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-                                    //         }}
-                                    //     />
-                                    //
-                                    // </Grid>
+
                                     <PopUpCard cardInfo={algorithmCards[value]} />
                                 ))}
                             </Grid>
