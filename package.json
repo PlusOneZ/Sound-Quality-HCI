@@ -23,7 +23,9 @@
     "react-markdown": "^8.0.3",
     "react-router-dom": "^6.3.0",
     "react-scripts": "latest",
+    "rehype-katex": "^6.0.2",
     "remark-gfm": "^3.0.1",
+    "remark-math": "^5.1.1",
     "styled-components": "latest",
     "web-vitals": "^2.1.4"
   },

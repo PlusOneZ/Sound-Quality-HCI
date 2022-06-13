@@ -23,9 +23,12 @@ import stoiImg from "../assets/stoi.png"
 import {Grid} from "@mui/material";
 import {useTranslation} from "react-i18next";
 import ReactMarkdown from "react-markdown";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import remarkGfm from 'remark-gfm'
 
 
-
+import 'katex/dist/katex.min.css'
 
 
 
@@ -125,7 +128,9 @@ function PopUpCard(props){
                                 <CloseIcon />
                             </IconButton>
                             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                                <ReactMarkdown children={mdMap[cardInfo.algoName]}/>
+                                <ReactMarkdown children={mdMap[cardInfo.algoName]}
+                                               remarkPlugins={[remarkMath,remarkGfm]}
+                                               rehypePlugins={[rehypeKatex]}/>
                             </Typography>
                         </Box>
                     </Fade>
