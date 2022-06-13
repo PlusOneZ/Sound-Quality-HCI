@@ -21,10 +21,7 @@ import pesqImg from "../assets/pesq.png"
 import sisdrImg from "../assets/sisdr.png"
 import stoiImg from "../assets/stoi.png"
 import {Grid} from "@mui/material";
-import markdown from "../assets/markdown.json"
-
-
-
+import {useTranslation} from "react-i18next";
 import ReactMarkdown from "react-markdown";
 
 
@@ -33,7 +30,10 @@ import ReactMarkdown from "react-markdown";
 
 
 function PopUpCard(props){
+
     const {cardInfo}=props;
+
+    const {t} = useTranslation("main");
 
     const imgMap={
         "mosnet":mosnetImg,
@@ -43,6 +43,16 @@ function PopUpCard(props){
         "sisdr":sisdrImg,
         "stoi":stoiImg,
     }
+
+    const mdMap={
+        "mosnet":t("algo_md_info.mosnet"),
+        "srmr":t("algo_md_info.srmr"),
+        "bsseval":t("algo_md_info.bssevam"),
+        "pesq":t("algo_md_info.pesq"),
+        "sisdr":t("algo_md_info.sisdr"),
+        "stoi":t("algo_md_info.stoi"),
+    }
+
 
 
     const [open,setOpen]=React.useState(false);
@@ -115,7 +125,7 @@ function PopUpCard(props){
                                 <CloseIcon />
                             </IconButton>
                             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                                <ReactMarkdown children={markdown[cardInfo.id].content}/>
+                                <ReactMarkdown children={mdMap[cardInfo.algoName]}/>
                             </Typography>
                         </Box>
                     </Fade>
