@@ -48,7 +48,7 @@ function PopUpCard(props){
 
 
         "&:hover":{
-            boxShadow:"10px -10px grey",
+            boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
             cursor:"pointer",
         }
     };
@@ -74,7 +74,7 @@ function PopUpCard(props){
                     <CardMedia
                         component="img"
                         alt="green iguana"
-                        height="200"
+                        height="100"
                         src={imgMap[cardInfo.algoName]}
                     />
                     <CardContent>
