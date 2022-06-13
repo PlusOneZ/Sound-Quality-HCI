@@ -70,13 +70,18 @@ export default function useRecorder() {
 
       recorder.onstop = () => {
         const blob = new Blob(chunks, { type: "audio/wav; codecs=G.711" });
+        let file = new File([blob], 'audio.wav', {
+          type: 'audio/wav',
+          lastModified: Date.now(),
+        })
+        console.log(file, window.URL.createObjectURL(file))
         chunks = [];
 
         setRecorderState((prevState) => {
           if (prevState.mediaRecorder)
             return {
               ...initialState,
-              audio: window.URL.createObjectURL(blob),
+              audio: window.URL.createObjectURL(file),
             };
           else return initialState;
         });
