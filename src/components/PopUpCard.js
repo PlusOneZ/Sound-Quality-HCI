@@ -64,14 +64,18 @@ function PopUpCard(props){
 
 
 
-
     const cardStyle={
         margin: 2,
         width: 1 / 4,
-
+        webkitTransitionDuration: '0.3s',
+        transitionDuration: '0.3s',
+        webkitTransitionProperty: "transform",
+        transitionProperty: "transform",
         "&:hover":{
             boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
             cursor:"pointer",
+            position: "relative",
+            transform: "scale(1.05)",
         }
     };
 
@@ -82,7 +86,7 @@ function PopUpCard(props){
         transform: 'translate(-50%, -50%)',
         width: 2/3,
         bgcolor: 'background.paper',
-        border: '2px solid #000',
+        border: '10px solid #000',
         boxShadow: 24,
         p: 4,
 
