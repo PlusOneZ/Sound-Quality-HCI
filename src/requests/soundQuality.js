@@ -30,4 +30,14 @@ async function audioQualityRequest(audioURL, algorithms) {
   })
 }
 
-export {audioQualityRequest}
+async function audioQualityTestRequest(audioBlob) {
+  let form = new FormData()
+  form.append("audioFile", audioBlob)
+  return axios.post("tbd", form, {
+    headers: {
+      "Content-Type": "multipart/form-data"
+    }
+  })
+}
+
+export {audioQualityRequest, audioQualityTestRequest}
