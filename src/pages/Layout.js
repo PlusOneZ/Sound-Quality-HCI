@@ -17,6 +17,7 @@ import useRecorder from "../hooks/useRecorder";
 import UploadController from "../components/UploadController";
 import {audioQualityRequest} from "../requests/soundQuality";
 import IntroPage from "./Intro";
+import {RecorderTest} from "../components/RecorderTest";
 
 function Layout(props) {
   const {recorderState, ...handlers} = useRecorder()
@@ -39,6 +40,7 @@ function Layout(props) {
               </Route>
             </Route>
             <Route path={"sound-augmentation"} element={<> </>} />
+            <Route path={"test"} element={<RecorderTest />} />
           </Route>
         </Routes>
       </BrowserRouter>
