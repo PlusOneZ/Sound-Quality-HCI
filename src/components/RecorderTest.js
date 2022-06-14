@@ -4,19 +4,22 @@ import {Button} from "@mui/material";
 import {audioQualityTestRequest} from "../requests/soundQuality";
 import Box from "@mui/material/Box";
 
-const audioContext =  new (window.AudioContext || window.webkitAudioContext)();
+let audioContext = null, recorder = null;
 
-const recorder = new Recorder(audioContext, {
-  // An array of 255 Numbers
-  // You can use this to visualize the audio stream
-  // If you use react, check out react-wave-stream
-  onAnalysed: data => console.log(data),
-});
+async function init() {
+  audioContext =  new (window.AudioContext || window.webkitAudioContext)();
 
-navigator.mediaDevices.getUserMedia({audio: true})
-    .then(stream => recorder.init(stream))
-    .catch(err => console.log('Uh oh... unable to get stream...', err));
+  recorder = new Recorder(audioContext, {
+    // An array of 255 Numbers
+    // You can use this to visualize the audio stream
+    // If you use react, check out react-wave-stream
+    onAnalysed: data => console.log(data),
+  });
 
+  navigator.mediaDevices.getUserMedia({audio: true})
+      .then(stream => recorder.init(stream))
+      .catch(err => console.log('Uh oh... unable to get stream...', err));
+}
 
 function RecorderTest() {
 
@@ -24,8 +27,15 @@ function RecorderTest() {
   const [audioBlob, setAudioBlob] = useState(null);
 
   function startRecording() {
-    recorder.start()
-        .then(() => setIsRecording(true));
+    if (audioContext === null || recorder === null) {
+      init().then( () => {
+        recorder.start()
+            .then(() => setIsRecording(true));
+      })
+    } else {
+      recorder.start()
+          .then(() => setIsRecording(true));
+    }
   }
 
   function stopRecording() {
