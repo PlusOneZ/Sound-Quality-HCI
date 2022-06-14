@@ -8,7 +8,7 @@ export default function VideoCard(){
 
 
     return(
-        <Card sx={{ margin:2, width:161/200,background:"black"}}>
+        <Card sx={{ margin:2, width:161/200 , background:"black"}}>
             <CardMedia
                 component="video"
                 height="400"
