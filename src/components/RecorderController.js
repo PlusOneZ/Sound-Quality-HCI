@@ -6,6 +6,9 @@ import {IconButton, keyframes, styled} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import {useTranslation} from "react-i18next";
+import {useState} from "react";
+import Recorder from "recorder-js";
+import {audioQualityTestRequest} from "../requests/soundQuality";
 
 const recordAnimate = keyframes`
   0% {
@@ -35,9 +38,103 @@ const BlankIndicator = styled("div")`
   content: " ";
 `
 
-export default function RecorderControls({recorderState, handlers, audio}) {
-  const {recordingMinutes, recordingSeconds, initRecording} = recorderState;
-  const {startRecording, saveRecording, cancelRecording} = handlers;
+let audioContext = null, recorder = null;
+
+async function init() {
+  audioContext =  new (window.AudioContext || window.webkitAudioContext)();
+
+  recorder = new Recorder(audioContext, {
+    // An array of 255 Numbers
+    // You can use this to visualize the audio stream
+    // If you use react, check out react-wave-stream
+    // onAnalysed: data => console.log(data),
+  });
+
+  await navigator.mediaDevices.getUserMedia({audio: true})
+      .then(stream => recorder.init(stream))
+      .catch(err => console.log('Uh oh... unable to get stream...', err));
+}
+
+export default function RecorderControls({setGlobalAudio}) {
+  const [recordingMinutes, setRecordingMinutes] = useState(0);
+  const [recordingSeconds, setRecordingSeconds] = useState(0);
+
+  const [isRecording, setIsRecording] = useState(false);
+  const [audioBlob, setAudioBlob] = useState(null);
+
+  const [timerInterval, setTimerInterval] = useState(0);
+
+  function clearTime() {
+    console.log(timerInterval)
+    setRecordingMinutes(0)
+    setRecordingSeconds(0)
+    clearInterval(timerInterval)
+    setTimerInterval(0)
+    console.log("Cleared time interval")
+  }
+
+  function updateTime() {
+    setRecordingSeconds(prevState => {
+      if (prevState <= 59) {
+        return prevState + 1
+      } else {
+        setRecordingMinutes(prev => prev+1)
+        return 0
+      }
+    })
+  }
+
+  function startRecording() {
+    function start() {
+      recorder.start()
+          .then(() => {
+            setIsRecording(true);
+            setTimerInterval(setInterval(() => updateTime(), 1000))
+          });
+    }
+
+    if (audioContext === null || recorder === null) {
+      init().then( () => {
+        start();
+      })
+    } else {
+      start();
+    }
+  }
+
+  function saveRecording() {
+    console.log("Stopped recording")
+    recorder.stop()
+        .then(({blob, buffer}) => {
+          clearTime()
+          setAudioBlob(blob)
+          setIsRecording(false)
+          console.log(blob)
+          setGlobalAudio(window.URL.createObjectURL(blob))
+          // Recorder.download(blob, 'my-audio-file');
+          // buffer is an AudioBuffer
+        });
+  }
+
+  function cancelRecording() {
+    console.log("Canceled recording")
+    recorder.stop();
+    setAudioBlob(null);
+    setIsRecording(false);
+    clearTime()
+  }
+
+  function upload() {
+    audioQualityTestRequest(audioBlob).then(
+        response => {
+          //pass
+        },
+        err => {
+          console.log(err)
+        }
+    )
+  }
+
   const {t} = useTranslation("main");
 
   return (
@@ -45,7 +142,7 @@ export default function RecorderControls({recorderState, handlers, audio}) {
         <Box sx={{m: "0 auto", p: 2, display: "flex", justifyContent: "center"}}>
           <Box sx={{mb: "3"}}>
             <Box sx={{display: "flex"}}>
-              {initRecording ? <RecordingIndicator/> : <BlankIndicator/>}
+              {isRecording ? <RecordingIndicator/> : <BlankIndicator/>}
               <Typography variant={"h1"}>
                 <span>{formatMinutes(recordingMinutes)}</span>
                 <span>:</span>
@@ -63,7 +160,7 @@ export default function RecorderControls({recorderState, handlers, audio}) {
               }}>
             {/* Button group */}
             <div>
-              {initRecording ? (
+              {isRecording ? (
                   <IconButton
                       color={"warning"}
                       title={"Stop Recording"}
@@ -86,7 +183,7 @@ export default function RecorderControls({recorderState, handlers, audio}) {
               )}
             </div>
             <div>
-              {initRecording && (
+              {isRecording && (
                   <IconButton
                       title="Save recording"
                       aria-label={"save recording button"}
@@ -103,9 +200,9 @@ export default function RecorderControls({recorderState, handlers, audio}) {
         </Box>
 
         <Box sx={{display: "flex", justifyContent: "center"}}>
-          {!audio &&
+          {!audioBlob &&
               (<div>
-                {initRecording ?
+                {isRecording ?
                     (
                         <Typography variant={"h6"}>
                           <SaveIcon fontSize={"small"}/> - {t('hints.saveRecording')} &nbsp;
