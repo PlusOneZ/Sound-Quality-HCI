@@ -66,11 +66,11 @@
   },
   "scoreDescription": {
     "five-metric": "Result is measured in five-point scale: ",
-    "excellent-5": "优：4.0~5.0；评价：很好，听得清楚；延迟小，交流流畅",
-    "good-5": "良：3.5~4.0；评价：稍差，听得清楚；延迟小，交流欠流畅，有点杂音",
-    "medium-5": "中：3.0~3.5；评价：还可以，听不太清；有一定延迟，可以交流",
-    "bad-5": "差：1.5~3.0；评价：勉强，听不太清；延迟较大，交流需要重复多遍",
-    "worse-5": "劣：0~1.5；评价：极差，听不懂；延迟大，交流不通畅",
+    "excellent-5": "A: 4.0-5.0; Clear and sound; low delay, fluent communication.",
+    "good-5": "B：3.5~4.0；Clear; low delay but with mild blocking and noise.",
+    "medium-5": "C：3.0~3.5；Slightly unclear；Have delay but okay to communicate.",
+    "bad-5": "D：1.5~3.0；Unclear；Severe delay and requires repetition.",
+    "worse-5": "E：0~1.5；Unrecognizable；Severe delay with blocking.",
     "db": "The result is expressed in dB, higher is better.",
     "dimensionless": "The result dimensionless correlation coefficient, higher is better. 0=very bad, 1=very good."
   }
