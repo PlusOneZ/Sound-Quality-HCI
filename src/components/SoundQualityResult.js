@@ -269,30 +269,62 @@ function SoundQualityResult({data, loading}) {
         dataList.push(data[availableAlgorithms[i]].time)
       }
     }
-    return {
+    return{
       title: [
         {
           text: t("hints.timeConsumptionTitle"),
           left: 'center'
         },
       ],
-      xAxis: {
-        data: algoList
+      polar: {
+        radius: [30, '80%']
       },
-      yAxis: {
-        type: 'value',
-        splitArea: {
-          show: true
-        },
-        title: "time/ms"
+      radiusAxis: {
+        max: Math.max(...dataList)
       },
-      series: [
-        {
-          type: 'bar',
-          data: dataList
+      angleAxis: {
+        type: 'category',
+        data: algoList,
+        startAngle: 75
+      },
+      tooltip: {},
+      series: {
+        type: 'bar',
+        data:  dataList,
+        coordinateSystem: 'polar',
+        label: {
+          show: true,
+          position: 'middle',
+          formatter: '{b}: {c}'
         }
-      ]
-    };
+      },
+      backgroundColor: '#fff',
+      animation: true
+    }
+    // return {
+    //   title: [
+    //     {
+    //       text: t("timeConsumptionTitle"),
+    //       left: 'center'
+    //     },
+    //   ],
+    //   xAxis: {
+    //     data: algoList
+    //   },
+    //   yAxis: {
+    //     type: 'value',
+    //     splitArea: {
+    //       show: true
+    //     },
+    //     title: "time/ms"
+    //   },
+    //   series: [
+    //     {
+    //       type: 'bar',
+    //       data: dataList
+    //     }
+    //   ]
+    // };
   }
 
   function getBoxOption(title, dataset, columnNames, granu = 5) {
@@ -447,7 +479,9 @@ function SoundQualityResult({data, loading}) {
                   })
                 }
               </Box>
-              <ReactECharts option={timeBarOptions}/>
+              <Box sx={{height: "60vh"}} >
+                <ReactECharts option={timeBarOptions} style={{height: "60vh"}}/>
+              </Box>
             </>
         }
         <Box sx={{height: 4, pt: 2, mt: 4}}> &nbsp; </Box>

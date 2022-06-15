@@ -33,7 +33,8 @@ async function audioQualityRequest(audioURL, algorithms) {
 async function audioQualityTestRequest(audioBlob) {
   let form = new FormData()
   form.append("audioFile", audioBlob)
-  return axios.post("tbd", form, {
+  form.append("algorithms", ['pesq'])
+  return axios.post("http://192.168.3.133:5000/audioQuality", form, {
     headers: {
       "Content-Type": "multipart/form-data"
     }
