@@ -50,7 +50,7 @@ function PopUpCard(props){
     const mdMap={
         "mosnet":t("algo_md_info.mosnet"),
         "srmr":t("algo_md_info.srmr"),
-        "bsseval":t("algo_md_info.bssevam"),
+        "bsseval":t("algo_md_info.bsseval"),
         "pesq":t("algo_md_info.pesq"),
         "sisdr":t("algo_md_info.sisdr"),
         "stoi":t("algo_md_info.stoi"),
