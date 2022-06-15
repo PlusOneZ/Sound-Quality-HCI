@@ -7,7 +7,7 @@ import {Link, Outlet, useLocation} from "react-router-dom"
 import Button from "@mui/material/Button";
 import SendIcon from '@mui/icons-material/Send';
 import {AlgorithmSelection, initState} from "../components/AlgorithmSelection";
-import SoundQualityResult from "../components/SoundQualityResult";
+import SoundQualityResult, {mockedData} from "../components/SoundQualityResult";
 import {IconButton, Stack} from "@mui/material";
 import Recorder from "recorder-js";
 import {Download} from "@mui/icons-material";
@@ -97,8 +97,8 @@ function UploadOrRecord({uploadHandler, audio}) {
         }
 
         {/*  TODO: Results goes here */}
-        {(result || loading) &&
-            <SoundQualityResult data={result} loading={loading}/>
+        {(true || loading) &&
+            <SoundQualityResult data={mockedData} loading={loading}/>
         }
       </Box>
   )

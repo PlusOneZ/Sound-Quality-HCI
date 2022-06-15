@@ -4,6 +4,9 @@ import {CircularProgress} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import {useTranslation} from "react-i18next";
+import Tooltip, {tooltipClasses} from '@mui/material/Tooltip';
+import {styled} from '@mui/material/styles';
+
 
 const mockedData = {
   "bsseval": {
@@ -162,16 +165,69 @@ const mockedData = {
   }
 }
 
+const HtmlTooltip = styled(({className, ...props}) => (
+    <Tooltip {...props} classes={{popper: className}}/>
+))(({theme}) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: '#f5f5f9',
+    color: 'rgba(0, 0, 0, 0.87)',
+    maxWidth: 220,
+    fontSize: theme.typography.pxToRem(12),
+    border: '1px solid #dadde9',
+  },
+}));
 
 function QualityRating({algoName, max, rating}) {
-  const {t} = useTranslation("main", {keyPrefix: "hints"})
+  const {t} = useTranslation("main")
   console.log(algoName, rating / max * 5)
   return (
       <Box sx={{ml: 10}}>
-        <Typography component="legend">
-          {t("overallScoreOfAlgo")}({algoName}): {rating.toFixed(3)}/{max}
-        </Typography>
-        {/*<Rating name={algoName + "-rating"} value={rating} max={max} readOnly/>*/}
+        <HtmlTooltip
+            title={
+          <>{max === 'db' ?
+              <Typography variant={"p"} >
+                {t("scoreDescription.db") }
+              </Typography> :
+              (max === 1) ? (
+                  <Typography variant={"p"} >
+                    {t("scoreDescription.dimensionless") }
+                  </Typography>
+              ) : (
+                  <Box sx={{display: "block"}}>
+                    <Typography variant={"p"} >
+                      {t("scoreDescription.five-metric") }
+                    </Typography>
+                    <br/>
+                    <Typography variant={"p"} >
+                      {t("scoreDescription.excellent-5") }
+                    </Typography>
+                    <br/>
+                    <Typography variant={"p"} >
+                      {t("scoreDescription.good-5") }
+                    </Typography>
+                    <br/>
+                    <Typography variant={"p"} >
+                      {t("scoreDescription.medium-5") }
+                    </Typography>
+                    <br/>
+                    <Typography variant={"p"} >
+                      {t("scoreDescription.bad-5") }
+                    </Typography>
+                    <br/>
+                    <Typography variant={"p"} >
+                      {t("scoreDescription.worse-5") }
+                    </Typography>
+                  </Box>
+              )
+          }
+          </>
+            }
+        >
+          <Typography component="legend">
+            {t("hints.overallScoreOfAlgo")}({algoName}): {rating.toFixed(3)}/{max}
+          </Typography>
+          {/*<Rating name={algoName + "-rating"} value={rating} max={max} readOnly/>*/}
+        </HtmlTooltip>
       </Box>
   )
 }
@@ -202,7 +258,7 @@ function CircularProgressWithLabel({rating, max}) {
 }
 
 function SoundQualityResult({data, loading}) {
-  const {t} = useTranslation("main", {keyPrefix: "hints"})
+  const {t} = useTranslation("main")
 
   function getTimeConsumptionBar(data) {
     let algoList = []
@@ -216,7 +272,7 @@ function SoundQualityResult({data, loading}) {
     return {
       title: [
         {
-          text: t("timeConsumptionTitle"),
+          text: t("hints.timeConsumptionTitle"),
           left: 'center'
         },
       ],
@@ -243,7 +299,7 @@ function SoundQualityResult({data, loading}) {
     return {
       title: [
         {
-          text: `${t("qualityResultOfAlgo")} ${title}`,
+          text: `${t("hints.qualityResultOfAlgo")} ${title}`,
           left: 'center'
         },
       ],
@@ -332,7 +388,7 @@ function SoundQualityResult({data, loading}) {
             :
             <>
               <Typography variant={"h2"} sx={{textAlign: "center"}}>
-                {t("qualityResultTitle")}
+                {t("hints.qualityResultTitle")}
               </Typography>
               <Box sx={{height: 2}}> &nbsp; </Box>
               {data.bsseval &&
@@ -349,7 +405,7 @@ function SoundQualityResult({data, loading}) {
                     <QualityRating
                         algoName={"bsseval"}
                         rating={data.bsseval.avgScore}
-                        max={100}
+                        max={"db"}
                         precision={0.5}
                     />
                   </>
@@ -358,9 +414,9 @@ function SoundQualityResult({data, loading}) {
                 {
                   [
                     {algo: "mosnet", max: 5},
-                    {algo: "srmr", max: 1},
+                    {algo: "srmr", max: 5},
                     {algo: "pesq", max: 5},
-                    {algo: "sisdr", max: 5},
+                    {algo: "sisdr", max: "db"},
                     {algo: "stoi", max: 1}
                   ].map(({algo, max}) => {
                     return (<Box key={algo} sx={{width: "50%"}}>

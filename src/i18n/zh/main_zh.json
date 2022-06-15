@@ -63,5 +63,15 @@
     "pesq": "# 测试一级标题\n## 测试二级标题\n\n测试文本内容\n\n测试列表:\n\n* 列表项1\n* 列表项2\n\n测试表格\n\n| never    | Gonna |\n| -------- | ----- |\n| give you | up    |\n\n测试公式: $\\frac{1+2}{3\\times 4}$\n $$\\frac{1+2}{3 \\times 4}$$\n\n\n测试图片\n\n[![stoi.jpg](https://i.postimg.cc/JhL8ZV3x/stoi.jpg)](https://postimg.cc/yDv2CGb3)",
     "sisdr": "# 测试一级标题\n## 测试二级标题\n\n测试文本内容\n\n测试列表:\n\n* 列表项1\n* 列表项2\n\n测试表格\n\n| never    | Gonna |\n| -------- | ----- |\n| give you | up    |\n\n测试公式: $\\frac{1+2}{3\\times 4}$\n $$\\frac{1+2}{3 \\times 4}$$\n\n\n测试图片\n\n[![stoi.jpg](https://i.postimg.cc/JhL8ZV3x/stoi.jpg)](https://postimg.cc/yDv2CGb3)",
     "stoi": "# 测试一级标题\n## 测试二级标题\n\n测试文本内容\n\n测试列表:\n\n* 列表项1\n* 列表项2\n\n测试表格\n\n| never    | Gonna |\n| -------- | ----- |\n| give you | up    |\n\n测试公式: $\\frac{1+2}{3\\times 4}$\n $$\\frac{1+2}{3 \\times 4}$$\n\n\n测试图片\n\n[![stoi.jpg](https://i.postimg.cc/JhL8ZV3x/stoi.jpg)](https://postimg.cc/yDv2CGb3)"
+  },
+  "scoreDescription": {
+    "five-metric": "结果用5分制表示：",
+    "good-5": "良：3.5~4.0；评价：稍差，听得清楚；延迟小，交流欠流畅，有点杂音",
+    "medium-5": "中：3.0~3.5；评价：还可以，听不太清；有一定延迟，可以交流",
+    "bad-5": "差：1.5~3.0；评价：勉强，听不太清；延迟较大，交流需要重复多遍",
+    "worse-5": "劣：0~1.5；评价：极差，听不懂；延迟大，交流不通畅",
+    "excellent-5": "优：4.0~5.0；评价：很好，听得清楚；延迟小，交流流畅",
+    "db": "结果用分贝值表示，越高表明声音质量越好",
+    "dimensionless": "结果用标准化的数值表示，0表示很差，1表示很好"
   }
 }
