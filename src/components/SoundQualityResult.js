@@ -213,30 +213,62 @@ function SoundQualityResult({data, loading}) {
         dataList.push(data[availableAlgorithms[i]].time)
       }
     }
-    return {
+    return{
       title: [
-        {
-          text: t("timeConsumptionTitle"),
-          left: 'center'
-        },
+            {
+              text: t("timeConsumptionTitle"),
+              left: 'center'
+            },
       ],
-      xAxis: {
-        data: algoList
+      polar: {
+        radius: [30, '80%']
       },
-      yAxis: {
-        type: 'value',
-        splitArea: {
-          show: true
-        },
-        title: "time/ms"
+      radiusAxis: {
+        max: 20000
       },
-      series: [
-        {
-          type: 'bar',
-          data: dataList
+      angleAxis: {
+        type: 'category',
+        data: algoList,
+        startAngle: 75
+      },
+      tooltip: {},
+      series: {
+        type: 'bar',
+        data:  dataList,
+        coordinateSystem: 'polar',
+        label: {
+          show: true,
+          position: 'middle',
+          formatter: '{b}: {c}'
         }
-      ]
-    };
+      },
+      backgroundColor: '#fff',
+      animation: true
+    }
+    // return {
+    //   title: [
+    //     {
+    //       text: t("timeConsumptionTitle"),
+    //       left: 'center'
+    //     },
+    //   ],
+    //   xAxis: {
+    //     data: algoList
+    //   },
+    //   yAxis: {
+    //     type: 'value',
+    //     splitArea: {
+    //       show: true
+    //     },
+    //     title: "time/ms"
+    //   },
+    //   series: [
+    //     {
+    //       type: 'bar',
+    //       data: dataList
+    //     }
+    //   ]
+    // };
   }
 
   function getBoxOption(title, dataset, columnNames, granu = 5) {

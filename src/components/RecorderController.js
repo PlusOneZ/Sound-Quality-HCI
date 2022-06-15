@@ -8,7 +8,6 @@ import Box from "@mui/material/Box";
 import {useTranslation} from "react-i18next";
 import {useState} from "react";
 import Recorder from "recorder-js";
-import {audioQualityTestRequest} from "../requests/soundQuality";
 
 const recordAnimate = keyframes`
   0% {
