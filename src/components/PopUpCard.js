@@ -65,8 +65,9 @@ function PopUpCard(props){
 
 
     const cardStyle={
-        margin: 2,
+        margin: "1%",
         width: 1 / 4,
+        height: 85/100,
         webkitTransitionDuration: '0.3s',
         transitionDuration: '0.3s',
         webkitTransitionProperty: "transform",
@@ -95,19 +96,19 @@ function PopUpCard(props){
 
     return(
 
-            <Grid sx={cardStyle}>
-                <Card onClick={handleOpen}>
+            <Grid sx={cardStyle} >
+                <Card onClick={handleOpen} sx={{height:"100%"}}>
                     <CardMedia
                         component="img"
                         alt="green iguana"
-                        height="200"
+                        height="65%"
                         src={imgMap[cardInfo.algoName]}
                     />
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
+                    <CardContent sx={{height:"35%"}}>
+                        <Typography gutterBottom variant="h5" component="div" sx={{height:"60%",fontSize:"1 rem"}} >
                             {cardInfo.algoName}
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography variant="body2" color="text.secondary" sx={{height:"30%",fontSize:"1 rem",margin:"1%"}}>
                             {cardInfo.description}
                         </Typography>
                     </CardContent>

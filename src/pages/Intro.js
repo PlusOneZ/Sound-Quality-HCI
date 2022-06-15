@@ -1,4 +1,4 @@
-import {createTheme,ThemeProvider} from "@mui/material";
+import {createTheme, ThemeProvider} from "@mui/material";
 import Container from "@mui/material/Container"
 import {CssBaseline} from "@mui/material";
 import {Grid} from "@mui/material";
@@ -51,25 +51,24 @@ function IntroPage(){
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <Container maxWidth="lg" >
-                <main>
-                    <Grid sx={{ flexGrow: 1,padding:5 }} container spacing={10}>
-                        <Grid item xs={12}>
-                            <Grid container justifyContent="center" spacing={2}>
-                                {[0, 1, 2].map((value) => (
-                                    <PopUpCard cardInfo={algorithmCards[value]} />
-                                ))}
-                            </Grid>
-                            <Grid container justifyContent="center" spacing={2}>
+                <Grid sx={{ flexGrow: 1,padding:2 }} container spacing={10}>
+                    <Grid item xs={12} sx={{height:"100vh"}}>
+                        <Grid container justifyContent="center" spacing={2} sx={{height:"30%"}}>
+                            {[0, 1, 2].map((value) => (
+                                <PopUpCard cardInfo={algorithmCards[value]} key={value} />
+                            ))}
+                        </Grid>
+                        <Grid container justifyContent="center" spacing={2} sx={{height:"40%"}}>
                             <VideoCard />
-                            </Grid>
-                            <Grid container justifyContent="center" spacing={2}>
-                                {[3, 4, 5].map((value) => (
-                                    <PopUpCard cardInfo={algorithmCards[value]} />
-                                ))}
-                            </Grid>
+                        </Grid>
+                        <Grid container justifyContent="center" spacing={2} sx={{height:"30%"}}>
+                            {[3, 4, 5].map((value) => (
+                                <PopUpCard cardInfo={algorithmCards[value]} key={value} />
+                            ))}
                         </Grid>
                     </Grid>
-                </main>
+                </Grid>
+
             </Container>
         </ThemeProvider>
     )
