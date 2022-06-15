@@ -42,7 +42,11 @@
     "clickToStartRecording": "点击按钮，开始录制",
     "chooseFromLocal": "选择本地音频文件",
     "currentAudioName": "当前音频文件",
-    "chooseAlgorithms": "选择音频质量分析算法："
+    "chooseAlgorithms": "选择音频质量分析算法：",
+    "qualityResultTitle": "质量评估结果",
+    "qualityResultOfAlgo": "评估算法：",
+    "overallScoreOfAlgo": "总体成绩",
+    "timeConsumptionTitle": "各算法花费时间"
   },
   "algo_brief_info": {
     "mosnet": "简要介绍mosnet",

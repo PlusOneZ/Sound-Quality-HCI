@@ -1,8 +1,9 @@
 import ReactECharts from "echarts-for-react";
 import {availableAlgorithms} from "./AlgorithmSelection";
-import {CircularProgress, Rating} from "@mui/material";
+import {CircularProgress} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import {useTranslation} from "react-i18next";
 
 const mockedData = {
   "bsseval": {
@@ -161,125 +162,15 @@ const mockedData = {
   }
 }
 
-function getBoxOption(title, dataset, columnNames, granu = 5) {
-  return {
-    title: [
-      {
-        text: `Result of ${title}`,
-        left: 'center'
-      },
-    ],
-    dataset: [
-      {
-        source: dataset
-      },
-      {
-        transform: {
-          type: 'boxplot',
-        }
-      },
-      {
-        fromDatasetIndex: 1,
-        fromTransformResult: 1
-      }
-    ],
-    tooltip: {
-      trigger: 'item',
-      axisPointer: {
-        type: 'shadow'
-      }
-    },
-    grid: {
-      left: '10%',
-      right: '10%',
-      bottom: '15%'
-    },
-    xAxis: {
-      type: 'category',
-      boundaryGap: true,
-      nameGap: 30,
-      splitArea: {
-        show: false
-      },
-      splitLine: {
-        show: true
-      },
-      axisLabel: {
-        formatter: function (value) {
-          return columnNames[value]
-        }
-      }
-    },
-    yAxis: {
-      type: 'value',
-      splitArea: {
-        show: true
-      },
-      splitLine: {
-        show: true
-      },
-      max: Math.ceil(Math.max(
-          ...dataset.reduce((prev, val) => prev.concat(val), [])
-      ) / granu) * granu,
-      min: Math.floor(Math.min(
-          ...dataset.reduce((prev, val) => prev.concat(val), [])
-      ) / granu) * granu,
-    },
-    series: [
-      {
-        name: 'boxplot',
-        type: 'boxplot',
-        datasetIndex: 1
-      },
-      {
-        name: 'outlier',
-        type: 'scatter',
-        datasetIndex: 2
-      }
-    ]
-  }
-}
-
-function getTimeConsumptionBar(data) {
-  let algoList = []
-  let dataList = []
-  for (let i = 0; i < availableAlgorithms.length; i++) {
-    if (data[availableAlgorithms[i]]) {
-      algoList.push(availableAlgorithms[i])
-      dataList.push(data[availableAlgorithms[i]].time)
-    }
-  }
-  return {
-    title: [
-      {
-        text: `Time Consumption of Each Algorithm`,
-        left: 'center'
-      },
-    ],
-    xAxis: {
-      data: algoList
-    },
-    yAxis: {
-      type: 'value',
-      splitArea: {
-        show: true
-      },
-      title: "time/ms"
-    },
-    series: [
-      {
-        type: 'bar',
-        data: dataList
-      }
-    ]
-  };
-}
 
 function QualityRating({algoName, max, rating}) {
+  const {t} = useTranslation("main", {keyPrefix: "hints"})
   console.log(algoName, rating / max * 5)
   return (
       <Box sx={{ml: 10}}>
-        <Typography component="legend">Score of {algoName}: {rating}/{max}</Typography>
+        <Typography component="legend">
+          {t("overallScoreOfAlgo")}({algoName}): {rating.toFixed(3)}/{max}
+        </Typography>
         {/*<Rating name={algoName + "-rating"} value={rating} max={max} readOnly/>*/}
       </Box>
   )
@@ -288,7 +179,7 @@ function QualityRating({algoName, max, rating}) {
 function CircularProgressWithLabel({rating, max}) {
   const value = Math.round(rating / max * 100)
   return (
-      <Box sx={{position: 'relative', display: 'inline-flex', ml: 10, mt:2}}>
+      <Box sx={{position: 'relative', display: 'inline-flex', ml: 10, mt: 2}}>
         <CircularProgress variant="determinate" value={value} size={'4em'}/>
         <Box
             sx={{
@@ -310,67 +201,201 @@ function CircularProgressWithLabel({rating, max}) {
   );
 }
 
-function SoundQualityResult({data}) {
+function SoundQualityResult({data, loading}) {
+  const {t} = useTranslation("main", {keyPrefix: "hints"})
 
-  const timeBarOptions = getTimeConsumptionBar(data)
+  function getTimeConsumptionBar(data) {
+    let algoList = []
+    let dataList = []
+    for (let i = 0; i < availableAlgorithms.length; i++) {
+      if (data[availableAlgorithms[i]]) {
+        algoList.push(availableAlgorithms[i])
+        dataList.push(data[availableAlgorithms[i]].time)
+      }
+    }
+    return {
+      title: [
+        {
+          text: t("timeConsumptionTitle"),
+          left: 'center'
+        },
+      ],
+      xAxis: {
+        data: algoList
+      },
+      yAxis: {
+        type: 'value',
+        splitArea: {
+          show: true
+        },
+        title: "time/ms"
+      },
+      series: [
+        {
+          type: 'bar',
+          data: dataList
+        }
+      ]
+    };
+  }
+
+  function getBoxOption(title, dataset, columnNames, granu = 5) {
+    return {
+      title: [
+        {
+          text: `${t("qualityResultOfAlgo")} ${title}`,
+          left: 'center'
+        },
+      ],
+      dataset: [
+        {
+          source: dataset
+        },
+        {
+          transform: {
+            type: 'boxplot',
+          }
+        },
+        {
+          fromDatasetIndex: 1,
+          fromTransformResult: 1
+        }
+      ],
+      tooltip: {
+        trigger: 'item',
+        axisPointer: {
+          type: 'shadow'
+        }
+      },
+      grid: {
+        left: '10%',
+        right: '10%',
+        bottom: '15%'
+      },
+      xAxis: {
+        type: 'category',
+        boundaryGap: true,
+        nameGap: 30,
+        splitArea: {
+          show: false
+        },
+        splitLine: {
+          show: true
+        },
+        axisLabel: {
+          formatter: function (value) {
+            return columnNames[value]
+          }
+        }
+      },
+      yAxis: {
+        type: 'value',
+        splitArea: {
+          show: true
+        },
+        splitLine: {
+          show: true
+        },
+        max: Math.ceil(Math.max(
+            ...dataset.reduce((prev, val) => prev.concat(val), [])
+        ) / granu) * granu,
+        min: Math.floor(Math.min(
+            ...dataset.reduce((prev, val) => prev.concat(val), [])
+        ) / granu) * granu,
+      },
+      series: [
+        {
+          name: 'boxplot',
+          type: 'boxplot',
+          datasetIndex: 1
+        },
+        {
+          name: 'outlier',
+          type: 'scatter',
+          datasetIndex: 2
+        }
+      ]
+    }
+  }
+
+  let timeBarOptions = null
+  if (data) {
+    timeBarOptions = getTimeConsumptionBar(data)
+  }
 
   return (
-      <>
-        {data.bsseval &&
+      <Box sx={{mt: 10}}>
+        {loading ?
+            <Box sx={{textAlign: "center"}}>
+              <CircularProgress/>
+            </Box>
+            :
             <>
-              <ReactECharts option={getBoxOption(
-                  "bsseval",
+              <Typography variant={"h2"} sx={{textAlign: "center"}}>
+                {t("qualityResultTitle")}
+              </Typography>
+              <Box sx={{height: 2}}> &nbsp; </Box>
+              {data.bsseval &&
+                  <>
+                    <ReactECharts option={getBoxOption(
+                        "bsseval",
+                        [
+                          data.bsseval.score.isr,
+                          data.bsseval.score.sar,
+                          data.bsseval.score.sdr
+                        ],
+                        ["isr", "sar", "sdr"]
+                    )}/>
+                    <QualityRating
+                        algoName={"bsseval"}
+                        rating={data.bsseval.avgScore}
+                        max={100}
+                        precision={0.5}
+                    />
+                  </>
+              }
+              <Box sx={{display: "flex", flexWrap: "wrap", mt: 5}}>
+                {
                   [
-                    data.bsseval.score.isr,
-                    data.bsseval.score.sar,
-                    data.bsseval.score.sdr
-                  ],
-                  ["isr", "sar", "sdr"]
-              )}/>
-              <QualityRating
-                  algoName={"bsseval"}
-                  rating={data.bsseval.avgScore}
-                  max={100}
-                  precision={0.5}
-              />
-              {/* TODO: figure out this max*/}
+                    {algo: "mosnet", max: 5},
+                    {algo: "srmr", max: 1},
+                    {algo: "pesq", max: 5},
+                    {algo: "sisdr", max: 5},
+                    {algo: "stoi", max: 1}
+                  ].map(({algo, max}) => {
+                    return (<Box key={algo} sx={{width: "50%"}}>
+                      {data[algo] &&
+                          <>
+                            <ReactECharts option={getBoxOption(
+                                algo,
+                                [data[algo].score],
+                                ["overall"],
+                                (algo === "pesq" ? 1e-2 : (algo === "stoi" ? 1e-7 : 5))
+                            )}/>
+                            <QualityRating
+                                algoName={algo}
+                                rating={data[algo].avgScore}
+                                max={max}
+                                precision={0.5}
+                            />
+                            {algo !== "sisdr" &&
+                                <CircularProgressWithLabel
+                                    rating={data[algo].avgScore}
+                                    max={max}
+                                />
+                            }
+                            <Box sx={{height: 4, pt: 2, mt: 4}}> &nbsp; </Box>
+                          </>
+                      }
+                    </Box>)
+                  })
+                }
+              </Box>
+              <ReactECharts option={timeBarOptions}/>
             </>
         }
-        {[
-          {algo: "mosnet", max: 5},
-          {algo: "srmr", max: 1},
-          {algo: "pesq", max: 5},
-          {algo: "sisdr", max: 5},
-          {algo: "stoi", max: 1}
-        ].map(({algo, max}) => {
-          return (<Box key={algo}>
-            {data[algo] &&
-                <>
-                  <ReactECharts option={getBoxOption(
-                      algo,
-                      [data[algo].score],
-                      ["overall"],
-                      (algo === "pesq" ? 1e-2 : (algo === "stoi" ? 1e-7 : 5))
-                  )}/>
-                  <QualityRating
-                      algoName={algo}
-                      rating={data[algo].avgScore}
-                      max={max}
-                      precision={0.5}
-                  />
-                  {algo != "sisdr" &&
-                      <CircularProgressWithLabel
-                          rating={data[algo].avgScore}
-                          max={max}
-                      />
-                  }
-                </>
-            }
-            <Box sx={{height: 4, pt: 2, mt: 4}}> &nbsp; </Box>
-          </Box>)
-        })}
-        <ReactECharts option={timeBarOptions} />
-      </>
+        <Box sx={{height: 4, pt: 2, mt: 4}}> &nbsp; </Box>
+      </Box>
   )
 }
 

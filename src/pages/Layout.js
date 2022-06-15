@@ -29,10 +29,10 @@ function Layout(props) {
         <Routes>
           <Route path={"/"} element={<> <AppBar /> <Outlet />  <TabBar /></>} >
             <Route path={"algorithms"} element={<IntroPage />} />
+            <Route path={""} element={<IntroPage />}/>
             <Route path={"sound-quality-analysis"}
                    element={<UploadOrRecord audio={audio} uploadHandler={audioQualityRequest}/>}
             >
-              <Route path={""}/>
               <Route path={"record"} element={<RecorderControls  setGlobalAudio={changeAudio}/>}>
                 {/*  Record UI here */}
               </Route>

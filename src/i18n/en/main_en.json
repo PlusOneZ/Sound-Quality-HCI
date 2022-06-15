@@ -42,7 +42,11 @@
     "clickToStartRecording": "Click button to start recoding.",
     "chooseFromLocal": "Choose From Local File",
     "currentAudioName": "Current Audio File: ",
-    "chooseAlgorithms": "Choose Analysis Algorithms: "
+    "chooseAlgorithms": "Choose Analysis Algorithms: ",
+    "qualityResultTitle": "Result of Quality Assessment",
+    "qualityResultOfAlgo": "Result of ",
+    "overallScoreOfAlgo": "Overall Score",
+    "timeConsumptionTitle": "Time Consumption of Each Algorithm"
   },
   "algo_brief_info": {
     "mosnet": "some scratch info about mosnet",

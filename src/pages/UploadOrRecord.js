@@ -7,20 +7,31 @@ import {Link, Outlet, useLocation} from "react-router-dom"
 import Button from "@mui/material/Button";
 import SendIcon from '@mui/icons-material/Send';
 import {AlgorithmSelection, initState} from "../components/AlgorithmSelection";
-import SoundQualityResult, {mockedData} from "../components/SoundQualityResult";
+import SoundQualityResult from "../components/SoundQualityResult";
 
 
 function UploadOrRecord({uploadHandler, audio}) {
   const location = useLocation();
   const {t} = useTranslation("main");
   const [algoList, setAlgoList] = useState(initState);
+  const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const setAlgoCb = (algo) => {
     setAlgoList(algo)
   }
 
   function onUpload() {
-    uploadHandler(audio, algoList)
+    setLoading(true)
+    uploadHandler(audio, algoList).then(response => {
+      console.log(response)
+      setResult(response.data)
+      setLoading(false)
+    }, error => {
+      setLoading(false)
+      alert("error occurred uploading file")
+      console.log(error)
+    })
   }
 
   let v = 0;
@@ -70,7 +81,9 @@ function UploadOrRecord({uploadHandler, audio}) {
         }
 
         {/*  TODO: Results goes here */}
-        <SoundQualityResult data={mockedData} />
+        {(result || loading) &&
+            <SoundQualityResult data={result} loading={loading}/>
+        }
       </Box>
   )
 }
