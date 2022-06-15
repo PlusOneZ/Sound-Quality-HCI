@@ -24,7 +24,7 @@ function Denoise({uploadHandler, audio, clearAudio}) {
     uploadHandler(audio).then(response => {
       console.log(response)
       setLoading(false)
-      setResult("TODO") //TODO: fill this
+      setResult(response.data) //TODO: fill this
     }, error => {
       setLoading(false)
       alert("error occurred uploading file")

@@ -17,7 +17,7 @@ import {audioQualityRequest} from "../requests/soundQuality";
 import IntroPage from "./Intro";
 import {useState} from "react";
 import Denoise from "./Denoise";
-import {uploadForDenoising} from "../requests/AudioDenoise";
+import {uploadForDenoising} from "../requests/audioDenoise";
 
 function Layout(props) {
   const [audio, setAudio] = useState(null);

@@ -44,6 +44,7 @@
     "currentAudioName": "当前音频文件",
     "chooseAlgorithms": "选择音频质量分析算法：",
     "qualityResultTitle": "质量评估结果",
+    "denoisingResultTitle": "降噪处理结果",
     "qualityResultOfAlgo": "评估算法：",
     "overallScoreOfAlgo": "总体成绩",
     "timeConsumptionTitle": "各算法花费时间（ms）",
