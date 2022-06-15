@@ -301,30 +301,6 @@ function SoundQualityResult({data, loading}) {
       backgroundColor: '#fff',
       animation: true
     }
-    // return {
-    //   title: [
-    //     {
-    //       text: t("timeConsumptionTitle"),
-    //       left: 'center'
-    //     },
-    //   ],
-    //   xAxis: {
-    //     data: algoList
-    //   },
-    //   yAxis: {
-    //     type: 'value',
-    //     splitArea: {
-    //       show: true
-    //     },
-    //     title: "time/ms"
-    //   },
-    //   series: [
-    //     {
-    //       type: 'bar',
-    //       data: dataList
-    //     }
-    //   ]
-    // };
   }
 
   function getBoxOption(title, dataset, columnNames, granu = 5) {

@@ -16,6 +16,8 @@ import UploadController from "../components/UploadController";
 import {audioQualityRequest} from "../requests/soundQuality";
 import IntroPage from "./Intro";
 import {useState} from "react";
+import Denoise from "./Denoise";
+import {uploadForDenoising} from "../requests/AudioDenoise";
 
 function Layout(props) {
   const [audio, setAudio] = useState(null);
@@ -43,14 +45,16 @@ function Layout(props) {
                      />
                    }
             >
-              <Route path={"record"} element={<RecorderControls setGlobalAudio={changeAudio}/>}>
-                {/*  Record UI here */}
-              </Route>
-              <Route path={"upload"} element={<UploadController setUploadFile={changeAudio}/>}>
-                {/*  Record UI here */}
-              </Route>
+              <Route path={"record"} element={<RecorderControls setGlobalAudio={changeAudio}/>}/>
+              <Route path={"upload"} element={<UploadController setUploadFile={changeAudio}/>}/>
             </Route>
-            <Route path={"sound-augmentation"} element={<> </>}/>
+            <Route
+                path={"sound-denoise"}
+                element={<Denoise audio={audio} clearAudio={clearAu} uploadHandler={uploadForDenoising}/>}
+            >
+              <Route path={"record"} element={<RecorderControls setGlobalAudio={changeAudio}/>}/>
+              <Route path={"upload"} element={<UploadController setUploadFile={changeAudio}/>}/>
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>

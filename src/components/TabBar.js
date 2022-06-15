@@ -32,7 +32,7 @@ function TabBar(props) {
     },
     {
       label: t("augment"),
-      route: "/sound-augmentation",
+      route: "/sound-denoise/record",
       icon: <AutofpsSelectIcon />
     },
     // {

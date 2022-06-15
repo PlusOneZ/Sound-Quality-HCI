@@ -1,36 +1,30 @@
-import Box from "@mui/material/Box";
+import {Link, Outlet, useLocation} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 import {useState} from "react";
 import Tabs from "@mui/material/Tabs";
-import {useTranslation} from "react-i18next";
 import Tab from "@mui/material/Tab";
-import {Link, Outlet, useLocation} from "react-router-dom"
-import Button from "@mui/material/Button";
-import SendIcon from '@mui/icons-material/Send';
-import {AlgorithmSelection, initState} from "../components/AlgorithmSelection";
+import Box from "@mui/material/Box";
 import {IconButton, Stack} from "@mui/material";
 import Recorder from "recorder-js";
 import {Download} from "@mui/icons-material";
-import SoundQualityResult from "../components/SoundQualityResult";
+import Button from "@mui/material/Button";
+import SendIcon from "@mui/icons-material/Send";
+import SoundDenoiseResult from "../components/SoundDenoiseResult";
 import Typography from "@mui/material/Typography";
 
 
-function UploadOrRecord({uploadHandler, audio, clearAudio}) {
+function Denoise({uploadHandler, audio, clearAudio}) {
   const location = useLocation();
   const {t} = useTranslation("main");
-  const [algoList, setAlgoList] = useState(initState);
-  const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
-
-  const setAlgoCb = (algo) => {
-    setAlgoList(algo)
-  }
+  const [result, setResult] = useState(null);
 
   function onUpload() {
     setLoading(true)
-    uploadHandler(audio, algoList).then(response => {
+    uploadHandler(audio).then(response => {
       console.log(response)
-      setResult(response.data)
       setLoading(false)
+      setResult("TODO") //TODO: fill this
     }, error => {
       setLoading(false)
       alert("error occurred uploading file")
@@ -52,7 +46,7 @@ function UploadOrRecord({uploadHandler, audio, clearAudio}) {
   return (
       <Box sx={{p: 2, width: "60%", m: "0 auto"}}>
         <Typography variant={"h5"} >
-          {t("hints.qualityTitle")}
+          {t("hints.denoiseTitle")}
         </Typography>
         <Tabs
             value={value}
@@ -64,7 +58,6 @@ function UploadOrRecord({uploadHandler, audio, clearAudio}) {
           <Tab label={t("menu.upload")} component={Link} to={"upload"}/>
         </Tabs>
         <Outlet/>
-
         {audio &&
             (
                 <Box sx={{
@@ -86,7 +79,7 @@ function UploadOrRecord({uploadHandler, audio, clearAudio}) {
                       <Download />
                     </IconButton>
                   </Stack>
-                  <AlgorithmSelection callBack={setAlgoCb} mode={value===0 ? "RECORD" : "UPLOAD"}/>
+
                   <Button
                       variant="outlined"
                       sx={{mt: 2}}
@@ -94,17 +87,16 @@ function UploadOrRecord({uploadHandler, audio, clearAudio}) {
                       endIcon={<SendIcon/>}
                       size={"large"}
                   >
-                    {t("hints.analysisButton")}
+                    {t("hints.denoiseButton")}
                   </Button>
                 </Box>
             )
         }
-
         {(result || loading) &&
-            <SoundQualityResult data={result} loading={loading}/>
+            <SoundDenoiseResult data={result} loading={loading}/>
         }
       </Box>
   )
 }
 
-export {UploadOrRecord};
+export default Denoise;

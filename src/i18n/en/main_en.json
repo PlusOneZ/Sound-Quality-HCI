@@ -46,7 +46,10 @@
     "qualityResultTitle": "Result of Quality Assessment",
     "qualityResultOfAlgo": "Result of ",
     "overallScoreOfAlgo": "Overall Score",
-    "timeConsumptionTitle": "Time Consumption of Each Algorithm"
+    "timeConsumptionTitle": "Time Consumption of Each Algorithm",
+    "qualityTitle": "Sound Quality Analysis",
+    "denoiseTitle": "Audio Denoising",
+    "denoiseButton": "Upload for Denoising"
   },
   "algo_brief_info": {
     "mosnet": "Use neural network to predict MOS.",
