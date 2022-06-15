@@ -1,4 +1,4 @@
-import {deepPurple, lime} from '@mui/material/colors';
+import {blue, teal} from '@mui/material/colors';
 
 const getDesignTokens = (mode) => ({
   palette: {
@@ -6,9 +6,9 @@ const getDesignTokens = (mode) => ({
     ...(mode === 'light'
         ? {
           // palette values for light mode
-          primary: deepPurple,
+          primary: teal,
           secondary: {
-            ...lime,
+            ...teal,
           }
         }
         : {

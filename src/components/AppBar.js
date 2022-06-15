@@ -25,7 +25,7 @@ function AppBar() {
 
   return (
       <Box sx={{flexGrow: 1}}>
-        <MuiAppBar position="static" color={"secondary"} sx={{justifyContent:"space-between"}}>
+        <MuiAppBar position="static" color={"primary"} sx={{justifyContent:"space-between"}}>
           <Toolbar>
              <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
               {t("title")}
@@ -37,7 +37,7 @@ function AppBar() {
               <TranslateIcon />
             </IconButton>
               <Link href="https://github.com/PlusOneZ/Sound-Quality-HCI">
-                  <IconButton>
+                  <IconButton >
                     <GitHubIcon />
                   </IconButton>
               </Link>
