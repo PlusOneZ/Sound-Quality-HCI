@@ -46,7 +46,7 @@
     "qualityResultTitle": "质量评估结果",
     "qualityResultOfAlgo": "评估算法：",
     "overallScoreOfAlgo": "总体成绩",
-    "timeConsumptionTitle": "各算法花费时间",
+    "timeConsumptionTitle": "各算法花费时间（ms）",
     "qualityTitle": "声音质量分析",
     "denoiseTitle": "音频降噪",
     "denoiseButton": "上传音频做降噪处理"
