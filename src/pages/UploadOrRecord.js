@@ -13,7 +13,7 @@ import {Download} from "@mui/icons-material";
 import SoundQualityResult from "../components/SoundQualityResult";
 
 
-function UploadOrRecord({uploadHandler, audio}) {
+function UploadOrRecord({uploadHandler, audio, clearAudio}) {
   const location = useLocation();
   const {t} = useTranslation("main");
   const [algoList, setAlgoList] = useState(initState);
@@ -44,6 +44,7 @@ function UploadOrRecord({uploadHandler, audio}) {
   const [value, setValue] = useState(v);
 
   function changeValue(event, newVal) {
+    clearAudio()
     setValue(newVal)
   }
 
@@ -82,7 +83,7 @@ function UploadOrRecord({uploadHandler, audio}) {
                       <Download />
                     </IconButton>
                   </Stack>
-                  <AlgorithmSelection callBack={setAlgoCb}/>
+                  <AlgorithmSelection callBack={setAlgoCb} mode={value===0 ? "RECORD" : "UPLOAD"}/>
                   <Button
                       variant="outlined"
                       sx={{mt: 2}}

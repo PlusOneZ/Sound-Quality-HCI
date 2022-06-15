@@ -23,7 +23,7 @@ function booleanObjFromArr(arr, bool) {
 const allFalseState = booleanObjFromArr(availableAlgorithms, false)
 const initState = {...allFalseState, mosnet: true}
 
-function AlgorithmSelection({callBack}) {
+function AlgorithmSelection({callBack, mode}) {
   const {t} = useTranslation("main");
   const allSetState = booleanObjFromArr(availableAlgorithms, true)
   const [algorithms, setAlgorithms] = useState(initState);
@@ -77,6 +77,8 @@ function AlgorithmSelection({callBack}) {
           gridTemplateColumns: "1fr 1fr 1fr"
         }} >
           {availableAlgorithms.map((algo) => {
+            if (mode === "RECORD" && (algo === "bsseval" || algo === "pesq"))
+              return (<Box sx={{display: "none"}} key={algo}></Box>);
             return (
                 <FormControlLabel
                     key={algo}
