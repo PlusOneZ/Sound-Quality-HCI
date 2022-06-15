@@ -53,11 +53,11 @@
   },
   "algo_brief_info": {
     "mosnet": "使用神经网络预测MOS分数",
-    "srmr": "简要介绍srmr",
-    "bsseval": "简要介绍bsseval",
-    "pesq": "简要介绍pesq",
-    "sisdr": "简要介绍sisdr",
-    "stoi": "简要介绍stoi"
+    "srmr": "语音信号调制频谱能量比",
+    "bsseval": "盲源分离算法",
+    "pesq": "客观语音质量评估",
+    "sisdr": "尺度不变信号失真比",
+    "stoi": "短时客观可懂度"
   },
   "algo_md_info": {
     "mosnet":"MOSNet的idea很简单，即以MOS为基础对人类感知进行建模，使用神经网络来预测分数。对于神经网络来说我们需要足量的数据来避免过拟合。MOSNet的架构是LSTM、CNN以及它们的组合，MOSNet输出两种MOS分数，一是frame-level的分数，另一个是utterance-level的分数。\n\n![e628cf719ba14da68e53ae02e87ffc1b](https://uniplus.oss-cn-shanghai.aliyuncs.com/uniplus/e628cf719ba14da68e53ae02e87ffc1b.png)\n\nMOSNet运用的损失函数对utterance-level的MSE和对frame-level的MSE做平均：\n\n$$\nO=\\frac{1}{S} \\sum_{s=1}^{S}\\left[\\left(\\hat{Q}_{s}-Q_{s}\\right)^{2}+\\frac{\\alpha}{T_{s}} \\sum_{t=1}^{T_{s}}\\left(\\hat{Q}_{s}-q_{s, t}\\right)^{2}\\right]\n$$\n\n经过训练，MOSNet在VCC 2018数据集训练的结果在VCC 2016数据集上的泛化能力比较强\n\n",
