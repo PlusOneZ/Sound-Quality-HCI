@@ -8,6 +8,9 @@ import Button from "@mui/material/Button";
 import SendIcon from '@mui/icons-material/Send';
 import {AlgorithmSelection, initState} from "../components/AlgorithmSelection";
 import SoundQualityResult from "../components/SoundQualityResult";
+import {IconButton, Stack} from "@mui/material";
+import Recorder from "recorder-js";
+import {Download} from "@mui/icons-material";
 
 
 function UploadOrRecord({uploadHandler, audio}) {
@@ -66,13 +69,26 @@ function UploadOrRecord({uploadHandler, audio}) {
                   justifyContent: "center",
                   alignItems: "center"
                 }}>
-                  <audio controls src={audio}/>
+                  <Stack direction={"row"} alignItems="center" spacing={2}>
+                    <audio controls src={audio}/>
+                    <IconButton
+                        color={"success"}
+                        title={"download audio"}
+                        aria-label={"download the ready audio"}
+                        onClick={async function download() {
+                          Recorder.download(await fetch(audio).then(r => r.blob()), 'audio-file');
+                        }}
+                    >
+                      <Download />
+                    </IconButton>
+                  </Stack>
                   <AlgorithmSelection callBack={setAlgoCb}/>
                   <Button
                       variant="outlined"
                       sx={{mt: 2}}
                       onClick={onUpload}
                       endIcon={<SendIcon/>}
+                      size={"large"}
                   >
                     {t("hints.analysisButton")}
                   </Button>
