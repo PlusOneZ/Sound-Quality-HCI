@@ -49,7 +49,7 @@
     "timeConsumptionTitle": "Time Consumption of Each Algorithm"
   },
   "algo_brief_info": {
-    "mosnet": "Use neural network to predict MOS score.",
+    "mosnet": "Use neural network to predict MOS.",
     "srmr": "some scratch info about srmr",
     "bsseval": "some scratch info about bsseval",
     "pesq": "some scratch info about pesq",
