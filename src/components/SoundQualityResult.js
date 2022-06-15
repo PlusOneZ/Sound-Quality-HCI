@@ -1,6 +1,6 @@
 import ReactECharts from "echarts-for-react";
 import {availableAlgorithms} from "./AlgorithmSelection";
-import {Rating} from "@mui/material";
+import {CircularProgress, Rating} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
@@ -278,46 +278,39 @@ function getTimeConsumptionBar(data) {
 function QualityRating({algoName, max, rating}) {
   console.log(algoName, rating / max * 5)
   return (
-      <>
+      <Box sx={{ml: 10}}>
         <Typography component="legend">Score of {algoName}: {rating}/{max}</Typography>
-        <Rating name={algoName + "-rating"} value={rating / max * 5} readOnly/>
-      </>
+        {/*<Rating name={algoName + "-rating"} value={rating} max={max} readOnly/>*/}
+      </Box>
   )
 }
 
+function CircularProgressWithLabel({rating, max}) {
+  const value = Math.round(rating / max * 100)
+  return (
+      <Box sx={{position: 'relative', display: 'inline-flex', ml: 10, mt:2}}>
+        <CircularProgress variant="determinate" value={value} size={'4em'}/>
+        <Box
+            sx={{
+              top: 0,
+              left: 0,
+              bottom: 0,
+              right: 0,
+              position: 'absolute',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+        >
+          <Typography variant="caption" component="div">
+            {`${rating.toFixed(2)} / ${max}`}
+          </Typography>
+        </Box>
+      </Box>
+  );
+}
+
 function SoundQualityResult({data}) {
-
-  const boxMosnetOptions = getBoxOption(
-      "mosnet",
-      [data.mosnet.score],
-      ["overall"]
-  )
-
-  const boxPesqOptions = getBoxOption(
-      "pesq",
-      [data.pesq.score],
-      ["overall"],
-      1e-2
-  )
-
-  const boxSisdrOptions = getBoxOption(
-      "sisdr",
-      [data.sisdr.score],
-      ["overall"]
-  )
-
-  const boxSrmrOptions = getBoxOption(
-      "srmr",
-      [data.srmr.score],
-      ["overall"]
-  )
-
-  const boxStoiOptions = getBoxOption(
-      "stoi",
-      [data.stoi.score],
-      ["overall"],
-      1e-7
-  )
 
   const timeBarOptions = getTimeConsumptionBar(data)
 
@@ -336,14 +329,20 @@ function SoundQualityResult({data}) {
               )}/>
               <QualityRating
                   algoName={"bsseval"}
-                  defaultValue={data.bsseval.avgScore}
+                  rating={data.bsseval.avgScore}
                   max={100}
                   precision={0.5}
               />
               {/* TODO: figure out this max*/}
             </>
         }
-        {["mosnet", "srmr", "pesq", "sisdr", "stoi"].map( algo => {
+        {[
+          {algo: "mosnet", max: 5},
+          {algo: "srmr", max: 1},
+          {algo: "pesq", max: 5},
+          {algo: "sisdr", max: 5},
+          {algo: "stoi", max: 1}
+        ].map(({algo, max}) => {
           return (<Box key={algo}>
             {data[algo] &&
                 <>
@@ -351,19 +350,26 @@ function SoundQualityResult({data}) {
                       algo,
                       [data[algo].score],
                       ["overall"],
-                      (algo==="pesq" ? 1e-2 : (algo==="stoi" ? 1e-7 : 5))
+                      (algo === "pesq" ? 1e-2 : (algo === "stoi" ? 1e-7 : 5))
                   )}/>
                   <QualityRating
                       algoName={algo}
                       rating={data[algo].avgScore}
-                      max={algo === "stoi" ? 1 : 5}
+                      max={max}
                       precision={0.5}
                   />
+                  {algo != "sisdr" &&
+                      <CircularProgressWithLabel
+                          rating={data[algo].avgScore}
+                          max={max}
+                      />
+                  }
                 </>
             }
-            <Box sx={{height: 4, pt:2, mt: 4}} > &nbsp; </Box>
+            <Box sx={{height: 4, pt: 2, mt: 4}}> &nbsp; </Box>
           </Box>)
         })}
+        <ReactECharts option={timeBarOptions} />
       </>
   )
 }
