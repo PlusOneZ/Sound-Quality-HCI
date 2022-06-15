@@ -124,17 +124,6 @@ export default function RecorderControls({setGlobalAudio}) {
     clearTime()
   }
 
-  function upload() {
-    audioQualityTestRequest(audioBlob).then(
-        response => {
-          //pass
-        },
-        err => {
-          console.log(err)
-        }
-    )
-  }
-
   const {t} = useTranslation("main");
 
   return (

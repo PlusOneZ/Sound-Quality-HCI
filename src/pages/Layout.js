@@ -13,11 +13,9 @@ import {Route, Routes, Outlet} from "react-router-dom";
 import {UploadOrRecord} from "./UploadOrRecord";
 import AppBar from "../components/AppBar";
 import RecorderControls from "../components/RecorderController";
-
 import UploadController from "../components/UploadController";
 import {audioQualityRequest} from "../requests/soundQuality";
 import IntroPage from "./Intro";
-import {RecorderTest} from "../components/RecorderTest";
 import {useState} from "react";
 
 function Layout(props) {
