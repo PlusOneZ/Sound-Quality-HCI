@@ -438,9 +438,9 @@ function SoundQualityResult({data, loading}) {
                     {algo: "sisdr", max: "db"},
                     {algo: "stoi", max: 1}
                   ].map(({algo, max}) => {
-                    return (<Box key={algo} sx={{width: "50%"}}>
+                    return (<>
                       {data[algo] &&
-                          <>
+                          <Box key={algo} sx={{width: "50%"}}>
                             <ReactECharts option={getBoxOption(
                                 algo,
                                 [data[algo].score],
@@ -460,9 +460,9 @@ function SoundQualityResult({data, loading}) {
                                 />
                             }
                             <Box sx={{height: 4, pt: 2, mt: 4}}> &nbsp; </Box>
-                          </>
+                          </Box>
                       }
-                    </Box>)
+                    </>)
                   })
                 }
               </Box>
