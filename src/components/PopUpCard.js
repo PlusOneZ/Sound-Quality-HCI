@@ -97,15 +97,16 @@ function PopUpCard(props){
     return(
 
             <Grid sx={cardStyle} >
-                <Card onClick={handleOpen} sx={{height:"100%"}}>
+                <Card onClick={handleOpen} sx={{minHeight:"100%"}}>
                     <CardMedia
                         component="img"
                         alt="green iguana"
-                        height="65%"
+                        // height="65%"
+                        sx={{maxHeight: "14vh"}}
                         src={imgMap[cardInfo.algoName]}
                     />
-                    <CardContent sx={{height:"35%"}}>
-                        <Typography gutterBottom variant="h5" component="div" sx={{height:"60%",fontSize:"1 rem"}} >
+                    <CardContent sx={{minHeight:"6vh"}}>
+                        <Typography gutterBottom variant="h6" component="div" sx={{height:"60%",fontSize:"1 rem"}} >
                             {cardInfo.algoName}
                         </Typography>
                         <Typography variant="body2" color="text.secondary" sx={{height:"30%",fontSize:"1 rem",margin:"1%"}}>

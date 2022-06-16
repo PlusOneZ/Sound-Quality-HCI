@@ -53,15 +53,15 @@ function IntroPage(){
             <Container maxWidth="lg" >
                 <Grid sx={{ flexGrow: 1,padding:2 }} container spacing={10}>
                     <Grid item xs={12} sx={{height:"100vh"}}>
-                        <Grid container justifyContent="center" spacing={2} sx={{height:"30%"}}>
+                        <Grid container justifyContent="center" spacing={2} sx={{minHeight:"30%", mb: 2}}>
                             {[0, 1, 2].map((value) => (
                                 <PopUpCard cardInfo={algorithmCards[value]} key={value} />
                             ))}
                         </Grid>
-                        <Grid container justifyContent="center" spacing={2} sx={{height:"40%"}}>
+                        <Grid container justifyContent="center" spacing={2} sx={{height:"35%", mb: 2}}>
                             <VideoCard />
                         </Grid>
-                        <Grid container justifyContent="center" spacing={2} sx={{height:"30%"}}>
+                        <Grid container justifyContent="center" spacing={2} sx={{minHeight:"30%"}}>
                             {[3, 4, 5].map((value) => (
                                 <PopUpCard cardInfo={algorithmCards[value]} key={value} />
                             ))}
