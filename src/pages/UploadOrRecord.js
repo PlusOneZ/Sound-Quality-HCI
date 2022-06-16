@@ -12,6 +12,7 @@ import Recorder from "recorder-js";
 import {Download} from "@mui/icons-material";
 import SoundQualityResult from "../components/SoundQualityResult";
 import Typography from "@mui/material/Typography";
+import WaveGraph from "../components/WaveGraph";
 
 
 function UploadOrRecord({uploadHandler, audio, clearAudio}) {
@@ -74,6 +75,7 @@ function UploadOrRecord({uploadHandler, audio, clearAudio}) {
                   alignItems: "center"
                 }}>
                   <Stack direction={"row"} alignItems="center" spacing={2}>
+                    <WaveGraph url={audio} />
                     <audio controls src={audio}/>
                     <IconButton
                         color={"success"}
