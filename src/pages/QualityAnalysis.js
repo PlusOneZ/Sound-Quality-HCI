@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 import WaveGraph from "../components/WaveGraph";
 
 
-function UploadOrRecord({uploadHandler, audio, clearAudio}) {
+function QualityAnalysis({uploadHandler, audio, clearAudio}) {
   const location = useLocation();
   const {t} = useTranslation("main");
   const [algoList, setAlgoList] = useState(initState);
@@ -97,4 +97,4 @@ function UploadOrRecord({uploadHandler, audio, clearAudio}) {
   )
 }
 
-export {UploadOrRecord};
+export {QualityAnalysis};

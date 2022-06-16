@@ -9,7 +9,7 @@ Layout
 
 import {BrowserRouter, Outlet, Route, Routes} from "react-router-dom";
 import TabBar from "../components/TabBar";
-import {UploadOrRecord} from "./UploadOrRecord";
+import {QualityAnalysis} from "./QualityAnalysis";
 import AppBar from "../components/AppBar";
 import RecorderControls from "../components/RecorderController";
 import UploadController from "../components/UploadController";
@@ -33,12 +33,12 @@ function Layout(props) {
   return (
       <BrowserRouter>
         <Routes>
-          <Route path={"/"} element={<> <AppBar/> <Outlet/> <TabBar/></>}>
+          <Route path={"/"} element={<> <AppBar/> <Outlet/> <TabBar clearAudio={clearAu}/></>}>
             <Route path={"algorithms"} element={<IntroPage/>}/>
             <Route path={""} element={<IntroPage/>}/>
             <Route path={"sound-quality-analysis"}
                    element={
-                     <UploadOrRecord
+                     <QualityAnalysis
                          audio={audio}
                          uploadHandler={audioQualityRequest}
                          clearAudio={clearAu}
