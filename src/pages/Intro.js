@@ -5,6 +5,7 @@ import {Grid} from "@mui/material";
 import {useTranslation} from "react-i18next";
 import PopUpCard from "../components/PopUpCard"
 import VideoCard from "../components/VideoCard"
+import Box from "@mui/material/Box";
 
 
 
@@ -68,8 +69,9 @@ function IntroPage(){
                         </Grid>
                     </Grid>
                 </Grid>
-
+                <Box sx={{height: 4, pt: 2, mt: 4}}> &nbsp; </Box>
             </Container>
+
         </ThemeProvider>
     )
 }

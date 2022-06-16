@@ -60,7 +60,7 @@ class WaveGraph extends React.Component {
           <IconButton onClick={this.togglePlayPause}>
             {this.PlayButton()}
           </IconButton>
-          <Box id={`waveform-${this.props.destination}`} sx={{width: "80%"}}> </Box>
+          <Box id={`waveform-${this.props.destination}`} sx={{width: "70%"}}> </Box>
           <IconButton
               color={"success"}
               title={"download audio"}
