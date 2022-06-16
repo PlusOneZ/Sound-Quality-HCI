@@ -1,9 +1,8 @@
 import Box from "@mui/material/Box";
-import {CircularProgress, IconButton, Stack} from "@mui/material";
+import {CircularProgress, Stack} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {useTranslation} from "react-i18next";
-import Recorder from "recorder-js";
-import {Download} from "@mui/icons-material";
+import WaveGraph from "./WaveGraph";
 
 
 function SoundDenoiseResult({data, loading}) {
@@ -25,17 +24,8 @@ function SoundDenoiseResult({data, loading}) {
                   spacing={2} sx={{mt: 2}}
                   justifyContent={"center"}
               >
-                <audio controls src={data}/>
-                <IconButton
-                    color={"success"}
-                    title={"download audio"}
-                    aria-label={"download the ready audio"}
-                    onClick={async function download() {
-                      Recorder.download(await fetch(data).then(r => r.blob()), 'denoise-result');
-                    }}
-                >
-                  <Download />
-                </IconButton>
+                <audio controls src={data} id={"audio-element-dn2"} style={{display: "none"}}/>
+                <WaveGraph url={data} destination={"denoise-2"} source={"#audio-element-dn2"}/>
               </Stack>
             </>
         }

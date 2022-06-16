@@ -4,13 +4,12 @@ import {useState} from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import {IconButton, Stack} from "@mui/material";
-import Recorder from "recorder-js";
-import {Download} from "@mui/icons-material";
+import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import SoundDenoiseResult from "../components/SoundDenoiseResult";
 import Typography from "@mui/material/Typography";
+import WaveGraph from "../components/WaveGraph";
 
 
 function Denoise({uploadHandler, audio, clearAudio}) {
@@ -67,17 +66,8 @@ function Denoise({uploadHandler, audio, clearAudio}) {
                   alignItems: "center"
                 }}>
                   <Stack direction={"row"} alignItems="center" spacing={2}>
-                    <audio controls src={audio}/>
-                    <IconButton
-                        color={"success"}
-                        title={"download audio"}
-                        aria-label={"download the ready audio"}
-                        onClick={async function download() {
-                          Recorder.download(await fetch(audio).then(r => r.blob()), 'audio-file');
-                        }}
-                    >
-                      <Download />
-                    </IconButton>
+                    <audio controls src={audio} id={"audio-element-dn1"} style={{display: "none"}}/>
+                    <WaveGraph url={audio} destination={"denoise-1"} source={"#audio-element-dn1"}/>
                   </Stack>
 
                   <Button

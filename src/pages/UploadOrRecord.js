@@ -7,9 +7,7 @@ import {Link, Outlet, useLocation} from "react-router-dom"
 import Button from "@mui/material/Button";
 import SendIcon from '@mui/icons-material/Send';
 import {AlgorithmSelection, initState} from "../components/AlgorithmSelection";
-import {IconButton, Stack} from "@mui/material";
-import Recorder from "recorder-js";
-import {Download} from "@mui/icons-material";
+import { Stack} from "@mui/material";
 import SoundQualityResult from "../components/SoundQualityResult";
 import Typography from "@mui/material/Typography";
 import WaveGraph from "../components/WaveGraph";
@@ -75,18 +73,8 @@ function UploadOrRecord({uploadHandler, audio, clearAudio}) {
                   alignItems: "center"
                 }}>
                   <Stack direction={"row"} alignItems="center" spacing={2}>
-                    <WaveGraph url={audio} />
-                    <audio controls src={audio}/>
-                    <IconButton
-                        color={"success"}
-                        title={"download audio"}
-                        aria-label={"download the ready audio"}
-                        onClick={async function download() {
-                          Recorder.download(await fetch(audio).then(r => r.blob()), 'audio-file');
-                        }}
-                    >
-                      <Download />
-                    </IconButton>
+                    <audio controls src={audio} id={"audio-element-sqa"} style={{display: "none"}} />
+                    <WaveGraph url={audio} destination={"quality"} source={"#audio-element-sqa"}/>
                   </Stack>
                   <AlgorithmSelection callBack={setAlgoCb} mode={value===0 ? "RECORD" : "UPLOAD"}/>
                   <Button
