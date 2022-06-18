@@ -122,6 +122,7 @@ function PopUpCard(props){
                         timeout: 500,
                     }}
                     aria-labelledby="modal-modal-title"
+
                     aria-describedby="modal-modal-description"
                 >
                     <Fade in={open}>
@@ -133,8 +134,9 @@ function PopUpCard(props){
                                         onClick={handleClose}>
                                 <CloseIcon />
                             </IconButton>
-                            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                                <ReactMarkdown children={mdMap[cardInfo.algoName]}
+                            <Typography id="modal-modal-description" sx={{height: "60vh",overflow:"scroll",mt:"2"}}>
+                                <ReactMarkdown
+                                               children={mdMap[cardInfo.algoName]}
                                                remarkPlugins={[remarkMath,remarkGfm]}
                                                rehypePlugins={[rehypeKatex]}/>
                             </Typography>
